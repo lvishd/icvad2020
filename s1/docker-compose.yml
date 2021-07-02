@@ -1,0 +1,33 @@
+version: "2.0"
+
+services:
+
+    server3: 
+        image: server3
+        container_name: server3
+        ports: 
+            - 8080:8080
+    
+    server4: 
+        image: server4
+        container_name: server4
+        ports: 
+            - 1111:1111
+        depends_on: 
+            - server3
+
+    server1: 
+        image: server1
+        container_name: server1
+        ports: 
+            - 4567:4567
+        depends_on: 
+            - server4
+
+    server2:
+        image: server2
+        container_name: server2
+        ports: 
+            - 5372:5372
+        depends_on: 
+            - server1

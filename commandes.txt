@@ -1,0 +1,12 @@
+# run image
+docker run -dp 8080:8080 server3
+docker run -dp 1111:1111 server4
+docker run -dp 4567:4567 server1
+docker run -dp 5372:5372 server2
+
+# get IP address
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' sleepy_margulis
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ecstatic_pascal
+
+# build containter
+docker build -t server1 .
