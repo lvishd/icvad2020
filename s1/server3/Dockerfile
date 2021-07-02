@@ -1,6 +1,6 @@
 FROM node:14
 WORKDIR /usr/src/app
-COPY package*.json server8080.js ./
+COPY package*.json server3.js ./
 RUN npm install
 EXPOSE 8080
-CMD ["node", "server8080.js"]
+CMD ["node", "server3.js"]
