@@ -2,9 +2,8 @@ version: "2.0"
 
 services:
 
-    worker: 
+    worker1: 
         image: worker
-        container_name: worker
         ports: 
             - 8080:8080
         extra_hosts:
@@ -14,11 +13,23 @@ services:
             ADD: "true"
             PORT: 8080
 
+    worker2: 
+        image: worker
+        ports: 
+            - 8081:8081
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        environment:
+            MULT: "true"
+            ADD: "true"
+            PORT: 8081
+
     planner: 
         image: planner
         container_name: planner
         depends_on:
-            - worker
+            - worker1
+            - worker2
         extra_hosts:
             - host.docker.internal:host-gateway
         environment:
