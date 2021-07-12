@@ -1,0 +1,18 @@
+version: "2.0"
+
+services:
+
+    worker: 
+        image: worker
+        container_name: worker
+
+    planner: 
+        image: planner
+        container_name: planner
+        ports: 
+            - 8080:8080
+        depends_on:
+            - worker
+
+
+    
