@@ -9,7 +9,6 @@ services:
         extra_hosts:
             - host.docker.internal:host-gateway
         environment:
-            MULT: "true"
             ADD: "true"
             PORT: 8080
 
@@ -21,7 +20,6 @@ services:
             - host.docker.internal:host-gateway
         environment:
             MULT: "true"
-            ADD: "true"
             PORT: 8081
 
     planner: 

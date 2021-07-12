@@ -10,6 +10,10 @@ const generateTasks = i =>
   new Array(i).fill(1).map(_ => ({ type: taskType(), args: args() }))
 
 let workers = ['http://host.docker.internal:8080','http://host.docker.internal:8081']
+
+let workers_add = ['http://host.docker.internal:8080']
+let workers_mult = ['http://host.docker.internal:8081']
+
 let tasks = generateTasks(nbTasks)
 let taskToDo = nbTasks
 
@@ -47,7 +51,13 @@ const main = async () => {
   while (taskToDo > 0) {
     await wait(100)
     if (workers.length === 0 || tasks.length === 0) continue
-    sendTask(workers[0], tasks[0])
+    // sendTask(workers[0], tasks[0])
+    const task = tasks[0]
+    if (task.type === "add"){
+      sendTask(workers_add[0], task)
+    } else {  // mult
+      sendTask(workers_mult[0], task)
+    }
   }
 }
 
