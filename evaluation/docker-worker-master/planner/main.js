@@ -21,7 +21,11 @@ const wait = mili => new Promise((resolve, reject) => setTimeout(resolve, mili))
 
 const sendTask = async (worker, task) => {
   console.log(`${worker}/${task.type}`, task)
-  workers = workers.filter(w => w !== worker)
+  if (task.type==="add"){
+    workers_add = workers_add.filter(w => w !== worker)
+  } else {
+    workers_mult = workers_mult.filter(w => w !== worker)
+  }
   tasks = tasks.filter(t => t !== task)
   const request = fetch(`${worker}/${task.type}`, {
     method: 'POST',
@@ -32,7 +36,11 @@ const sendTask = async (worker, task) => {
     body: JSON.stringify(task.args),
   })
     .then(res => {
-      workers = [...workers, worker]
+      if (task.type==="add"){
+        workers_add = [...workers_add, worker]
+      } else {
+        workers_mult = [...workers_mult, worker]
+      }
       return res.json()
     })
     .then(res => {
